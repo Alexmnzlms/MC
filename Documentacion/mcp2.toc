@@ -1,0 +1,4 @@
+\babel@toc {spanish}{}
+\babel@toc {spanish}{}
+\contentsline {section}{\numberline {1}Phoronix test suite}{2}% 
+\contentsline {section}{\numberline {2}Bibliograf\IeC {\'\i }a}{2}% 

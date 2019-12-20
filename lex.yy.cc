@@ -170,8 +170,27 @@ extern int yyleng;
 #define EOB_ACT_END_OF_FILE 1
 #define EOB_ACT_LAST_MATCH 2
     
-    #define YY_LESS_LINENO(n)
-    #define YY_LINENO_REWIND_TO(ptr)
+    /* Note: We specifically omit the test for yy_rule_can_match_eol because it requires
+     *       access to the local variable yy_act. Since yyless() is a macro, it would break
+     *       existing scanners that call yyless() from OUTSIDE yylex.
+     *       One obvious solution it to make yy_act a global. I tried that, and saw
+     *       a 5% performance hit in a non-yylineno scanner, because yy_act is
+     *       normally declared as a register variable-- so it is not worth it.
+     */
+    #define  YY_LESS_LINENO(n) \
+            do { \
+                int yyl;\
+                for ( yyl = n; yyl < yyleng; ++yyl )\
+                    if ( yytext[yyl] == '\n' )\
+                        --yylineno;\
+            }while(0)
+    #define YY_LINENO_REWIND_TO(dst) \
+            do {\
+                const char *p;\
+                for ( p = yy_cp-1; p >= (dst); --p)\
+                    if ( *p == '\n' )\
+                        --yylineno;\
+            }while(0)
     
 /* Return all but the first "n" matched characters back to the input stream. */
 #define yyless(n) \
@@ -313,8 +332,8 @@ int yyFlexLexer::yywrap() { return 1; }
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 4
-#define YY_END_OF_BUFFER 5
+#define YY_NUM_RULES 5
+#define YY_END_OF_BUFFER 6
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -322,9 +341,10 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[11] =
+static const flex_int16_t yy_accept[13] =
     {   0,
-        0,    0,    5,    2,    3,    2,    0,    0,    1,    0
+        0,    0,    6,    3,    4,    3,    0,    0,    2,    0,
+        1,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -333,8 +353,8 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    3,    1,    3,    3,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    4,    3,    3,    3,
-        3,    3,    3,    3,    3,    3,    3,    1,    3,    5,
+        1,    1,    1,    1,    3,    3,    4,    3,    3,    3,
+        3,    3,    3,    3,    3,    3,    3,    3,    3,    5,
         3,    6,    1,    1,    3,    3,    3,    3,    3,    3,
         3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
         3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
@@ -364,29 +384,34 @@ static const YY_CHAR yy_meta[7] =
         1,    1,    1,    1,    1,    1
     } ;
 
-static const flex_int16_t yy_base[12] =
+static const flex_int16_t yy_base[14] =
     {   0,
-        0,    4,    7,   14,   14,    7,    0,    0,   14,   14,
-        0
+        0,    4,   12,   14,   14,    7,    4,    1,   14,    0,
+       14,   14,    0
     } ;
 
-static const flex_int16_t yy_def[12] =
+static const flex_int16_t yy_def[14] =
     {   0,
-       11,   11,   10,   10,   10,   10,    6,    7,   10,    0,
-       10
+       13,   13,   12,   12,   12,   12,    6,    7,   12,    8,
+       12,    0,   12
     } ;
 
 static const flex_int16_t yy_nxt[21] =
     {   0,
-        4,    5,   10,    7,    6,    5,   10,   10,    6,    7,
-        8,   10,    9,    3,   10,   10,   10,   10,   10,   10
+        4,    5,   12,   12,    6,    5,   11,   10,    6,    7,
+        8,   12,    9,    3,   12,   12,   12,   12,   12,   12
     } ;
 
 static const flex_int16_t yy_chk[21] =
     {   0,
-       11,    1,    0,    7,    1,    2,    3,    0,    2,    6,
-        6,    0,    6,   10,   10,   10,   10,   10,   10,   10
+       13,    1,    0,    0,    1,    2,    8,    7,    2,    6,
+        6,    3,    6,   12,   12,   12,   12,   12,   12,   12
     } ;
+
+/* Table of booleans, true if rule could match eol. */
+static const flex_int32_t yy_rule_can_match_eol[6] =
+    {   0,
+0, 0, 0, 1, 0,     };
 
 /* The intent behind this definition is that it'll catch
  * any uses of REJECT which flex missed.
@@ -396,7 +421,7 @@ static const flex_int16_t yy_chk[21] =
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 #line 1 "practica2.l"
-#line 4 "practica2.l"
+#line 5 "practica2.l"
    /*------------------------ Seccion de Declaraciones -------------------------*/
 #include <iostream>
 #include <fstream>
@@ -405,11 +430,13 @@ static const flex_int16_t yy_chk[21] =
 using namespace std;
 ifstream fichero;
 stack<string> pila;
+stack<int> linea;
 string etiq;
 int nf = 0;
+int la = 0, lc = 0;
 bool fallo = false;
-#line 411 "lex.yy.cc"
-#line 412 "lex.yy.cc"
+#line 438 "lex.yy.cc"
+#line 439 "lex.yy.cc"
 
 #define INITIAL 0
 
@@ -541,11 +568,11 @@ YY_DECL
 		}
 
 	{
-#line 18 "practica2.l"
+#line 21 "practica2.l"
 
-#line 20 "practica2.l"
+#line 23 "practica2.l"
    /*-------------------------- Seccion de Reglas ------------------------------*/
-#line 548 "lex.yy.cc"
+#line 575 "lex.yy.cc"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -572,7 +599,7 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 11 )
+				if ( yy_current_state >= 13 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -591,6 +618,16 @@ yy_find_action:
 
 		YY_DO_BEFORE_ACTION;
 
+		if ( yy_act != YY_END_OF_BUFFER && yy_rule_can_match_eol[yy_act] )
+			{
+			int yyl;
+			for ( yyl = 0; yyl < yyleng; ++yyl )
+				if ( yytext[yyl] == '\n' )
+					
+    yylineno++;
+;
+			}
+
 do_action:	/* This label is used only to access EOF actions. */
 
 		switch ( yy_act )
@@ -604,68 +641,84 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 21 "practica2.l"
+#line 24 "practica2.l"
+{
+   string cadena(YYText());
+   cadena.pop_back();
+   cadena.erase(cadena.begin());
+   cout << "Leo la cadena autocontenida: <" << cadena << "> en la linea " << yylineno << endl;
+}
+	YY_BREAK
+case 2:
+YY_RULE_SETUP
+#line 31 "practica2.l"
 {
    string cadena(YYText());
    cadena.pop_back();
    cadena.erase(cadena.begin());
    bool borrar = false;
    int tam = cadena.size();
-   cout << "Leo la cadena: " << cadena << endl;
+   cout << "Leo la cadena: <" << cadena << "> en la linea " << yylineno << endl;
    for(string::iterator i = cadena.begin(); i != cadena.end(); i++){
       if(*i == ' '){
          borrar = true;
       }
       if(borrar){
-         if(*i != '/'){
-            cadena.erase(i);
-            i--;
-         }
+         cadena.erase(i);
+         i--;
       }
-      cout << "Cadena actual: " << cadena << endl;
+      //cout << "Cadena actual: " << cadena << endl;
    }
-   cout << "Cambios en la cadena: " << cadena << endl;
+   //cout << "Cambios en la cadena: " << cadena << endl;
    if(cadena[0] != '/'){
-      if(cadena.back() != '/'){
-         pila.push(cadena);
-      } else {
-         cout << "Encontrada instruccion autocontenida " << cadena << endl;
-      }
+      la = yylineno;
+      linea.push(la);
+      pila.push(cadena);
       //cout << "Meto en la pila: " << cadena << endl;
    } else{
+      lc = yylineno;
       cadena.erase(cadena.begin());
+      if(pila.empty()){
+         cout << "PILA VACIA -- NINGUNA CADENA ABIERTA" << endl;
+         exit(1);
+      }
       if(!cadena.compare(pila.top())){
-         cout << "Has cerrado la etiqueta " << pila.top() << " con " << cadena << endl;
+         la = linea.top();
+         cout << "----------------------------------------------------------------------------------------------" << endl;
+         cout << "Has cerrado la etiqueta <" << pila.top() << "> en la linea " <<
+         la << " con <" << cadena << "> en la linea " << lc << endl;
+         cout << "----------------------------------------------------------------------------------------------" << endl;
          pila.pop();
+         linea.pop();
       } else {
-         cout << "-----------------------------------------------------------" << endl;
-         cout << "Has cerrado MAL la etiqueta " << pila.top() << " con " << cadena << endl;
-         cout << "-----------------------------------------------------------" << endl;
+         cout << "----------------------------------------------------------------------------------------------" << endl;
+         cout << "Has cerrado MAL la etiqueta <" << pila.top() << "> con <" << cadena << "> en la linea " << lc << endl;
+         cout << "----------------------------------------------------------------------------------------------" << endl;
          fallo = true;
          nf++;
-         //exit(1);
+         exit(1);
       }
       //cout << "Fuera de la pila: " << cadena << endl;
    }
 }
 	YY_BREAK
-case 2:
-YY_RULE_SETUP
-#line 65 "practica2.l"
-{}
-	YY_BREAK
 case 3:
-/* rule 3 can match eol */
 YY_RULE_SETUP
-#line 66 "practica2.l"
+#line 80 "practica2.l"
 {}
 	YY_BREAK
 case 4:
+/* rule 4 can match eol */
 YY_RULE_SETUP
-#line 68 "practica2.l"
+#line 81 "practica2.l"
+{}
+	YY_BREAK
+case 5:
+YY_RULE_SETUP
+#line 83 "practica2.l"
 ECHO;
 	YY_BREAK
-#line 668 "lex.yy.cc"
+#line 721 "lex.yy.cc"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1082,7 +1135,7 @@ int yyFlexLexer::yy_get_next_buffer()
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 11 )
+			if ( yy_current_state >= 13 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1110,11 +1163,11 @@ int yyFlexLexer::yy_get_next_buffer()
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 11 )
+		if ( yy_current_state >= 13 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 10);
+	yy_is_jam = (yy_current_state == 12);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1151,6 +1204,10 @@ int yyFlexLexer::yy_get_next_buffer()
 		}
 
 	*--yy_cp = (char) c;
+
+    if ( c == '\n' ){
+        --yylineno;
+    }
 
 	(yytext_ptr) = yy_bp;
 	(yy_hold_char) = *yy_cp;
@@ -1221,6 +1278,11 @@ int yyFlexLexer::yy_get_next_buffer()
 	c = *(unsigned char *) (yy_c_buf_p);	/* cast for 8-bit char's */
 	*(yy_c_buf_p) = '\0';	/* preserve yytext */
 	(yy_hold_char) = *++(yy_c_buf_p);
+
+	if ( c == '\n' )
+		
+    yylineno++;
+;
 
 	return c;
 }
@@ -1628,7 +1690,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 68 "practica2.l"
+#line 83 "practica2.l"
 
    /*----------------------- Seccion de Procedimientos -------------------------*/
 
@@ -1647,11 +1709,16 @@ int main(int argc, char *argv[]){
       cout << "Se han encontrado " << nf << " fallos" << endl;
    }
    cout << "---------LA PILA---------" << endl;
-   while(!pila.empty()){
-      cout << pila.top() << endl;
-      pila.pop();
+   if(pila.empty()){
+      cout << "No queda nada en la pila" << endl;
+   } else {
+      while(!pila.empty()){
+         cout << "Ha quedado la etiqueta <" << pila.top() << "> en la linea " <<
+         linea.top() << endl;
+         pila.pop();
+         linea.pop();
+      }
    }
-
    return 0;
 }
 

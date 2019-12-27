@@ -1,0 +1,472 @@
+\documentclass[12pt, spanish]{article}
+\usepackage[spanish]{babel}
+\selectlanguage{spanish}
+\usepackage{url}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\usepackage{listings}
+\usepackage{tikz}
+
+\usepackage[default]{sourcesanspro}
+
+\setmarginsrb{2 cm}{1 cm}{2 cm}{2 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+
+\title{Práctica 4}
+\author{Alejandro Manzanares Lemus }
+\date{\today} 
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\theauthor}
+\lhead{\thetitle}
+\cfoot{\thepage}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \vspace*{0.5 cm}
+    \includegraphics[scale = 0.50]{UGR.png}\\[1.0 cm]
+    %\textsc{\LARGE Universidad de Granada}\\[2.0 cm]   
+    \textsc{\large 3ºA}\\[0.5 cm]            
+    \textsc{\large Grado en Ingeniería Informática}\\[0.5 cm]              
+    \rule{\linewidth}{0.2 mm} \\[0.4 cm]
+    { \huge \bfseries \thetitle}\\
+    \rule{\linewidth}{0.2 mm} \\[1.5 cm]
+    
+    \begin{minipage}{0.4\textwidth}
+        \begin{flushleft} \large
+            \emph{Autor:}\\
+            \theauthor
+            \end{flushleft}
+            \end{minipage}~
+            \begin{minipage}{0.4\textwidth}
+            \begin{flushright} \large
+            \emph{Asignatura: \\
+            Modelos de Computación}                   
+        \end{flushright}
+    \end{minipage}\\[1 cm]
+  	
+    {\large \thedate}\\[1 cm]
+ 	
+    \vfill
+    
+\end{titlepage}
+\pagebreak
+\section{Ejercicio 1}
+AFD que acepta cadenas de '000':
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (11.5,-16.1) circle (3);
+\draw (11.5,-16.1) node {$q0$};
+\draw [black] (28.3,-16.1) circle (3);
+\draw (28.3,-16.1) node {$q1$};
+\draw [black] (44.7,-16.1) circle (3);
+\draw (44.7,-16.1) node {$q2$};
+\draw [black] (61.7,-16.1) circle (3);
+\draw (61.7,-16.1) node {$q3$};
+\draw [black] (61.7,-16.1) circle (2.4);
+\draw [black] (5.3,-16.1) -- (8.5,-16.1);
+\fill [black] (8.5,-16.1) -- (7.7,-15.6) -- (7.7,-16.6);
+\draw [black] (14.5,-16.1) -- (25.3,-16.1);
+\fill [black] (25.3,-16.1) -- (24.5,-15.6) -- (24.5,-16.6);
+\draw (19.9,-16.6) node [below] {$0$};
+\draw [black] (31.3,-16.1) -- (41.7,-16.1);
+\fill [black] (41.7,-16.1) -- (40.9,-15.6) -- (40.9,-16.6);
+\draw (36.5,-16.6) node [below] {$0$};
+\draw [black] (47.7,-16.1) -- (58.7,-16.1);
+\fill [black] (58.7,-16.1) -- (57.9,-15.6) -- (57.9,-16.6);
+\draw (53.2,-15.6) node [above] {$0$};
+\draw [black] (26.62,-18.57) arc (-43.49677:-136.50323:9.264);
+\fill [black] (13.18,-18.57) -- (13.37,-19.49) -- (14.09,-18.81);
+\draw (19.9,-21.96) node [below] {$1$};
+\draw [black] (64.38,-14.777) arc (144:-144:2.25);
+\draw (68.95,-16.1) node [right] {$0,1$};
+\fill [black] (64.38,-17.42) -- (64.73,-18.3) -- (65.32,-17.49);
+\draw [black] (13.629,-13.989) arc (130.86742:49.13258:22.117);
+\fill [black] (13.63,-13.99) -- (14.56,-13.84) -- (13.91,-13.09);
+\draw (28.1,-8.1) node [above] {$1$};
+\end{tikzpicture}
+\end{center}
+AFD que acepta cadenas de '111':
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (11.5,-16.1) circle (3);
+\draw (11.5,-16.1) node {$p0$};
+\draw [black] (28.3,-16.1) circle (3);
+\draw (28.3,-16.1) node {$p1$};
+\draw [black] (44.7,-16.1) circle (3);
+\draw (44.7,-16.1) node {$p2$};
+\draw [black] (61.7,-16.1) circle (3);
+\draw (61.7,-16.1) node {$p3$};
+\draw [black] (61.7,-16.1) circle (2.4);
+\draw [black] (5.3,-16.1) -- (8.5,-16.1);
+\fill [black] (8.5,-16.1) -- (7.7,-15.6) -- (7.7,-16.6);
+\draw [black] (14.5,-16.1) -- (25.3,-16.1);
+\fill [black] (25.3,-16.1) -- (24.5,-15.6) -- (24.5,-16.6);
+\draw (19.9,-16.6) node [below] {$1$};
+\draw [black] (31.3,-16.1) -- (41.7,-16.1);
+\fill [black] (41.7,-16.1) -- (40.9,-15.6) -- (40.9,-16.6);
+\draw (36.5,-16.6) node [below] {$1$};
+\draw [black] (47.7,-16.1) -- (58.7,-16.1);
+\fill [black] (58.7,-16.1) -- (57.9,-15.6) -- (57.9,-16.6);
+\draw (53.2,-15.6) node [above] {$1$};
+\draw [black] (26.62,-18.57) arc (-43.49677:-136.50323:9.264);
+\fill [black] (13.18,-18.57) -- (13.37,-19.49) -- (14.09,-18.81);
+\draw (19.9,-21.96) node [below] {$0$};
+\draw [black] (64.38,-14.777) arc (144:-144:2.25);
+\draw (68.95,-16.1) node [right] {$0,1$};
+\fill [black] (64.38,-17.42) -- (64.73,-18.3) -- (65.32,-17.49);
+\draw [black] (13.629,-13.989) arc (130.86742:49.13258:22.117);
+\fill [black] (13.63,-13.99) -- (14.56,-13.84) -- (13.91,-13.09);
+\draw (28.1,-8.1) node [above] {$0$};
+\end{tikzpicture}
+\end{center}
+Autómata producto e intersección de los dos anteriores:
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (15.7,-11.6) circle (3);
+\draw (15.7,-11.6) node {$q0p0$};
+\draw [black] (26.3,-11.6) circle (3);
+\draw (26.3,-11.6) node {$q1p0$};
+\draw [black] (36.9,-11.6) circle (3);
+\draw (36.9,-11.6) node {$q2p0$};
+\draw [black] (47.6,-11.6) circle (3);
+\draw (47.6,-11.6) node {$q3p0$};
+\draw [black] (15.8,-21.5) circle (3);
+\draw (15.8,-21.5) node {$q0p1$};
+\draw [black] (15.8,-31.3) circle (3);
+\draw (15.8,-31.3) node {$q0p2$};
+\draw [black] (15.8,-41) circle (3);
+\draw (15.8,-41) node {$q0p3$};
+\draw [black] (47.7,-21.5) circle (3);
+\draw (47.7,-21.5) node {$q3p1$};
+\draw [black] (47.7,-31.3) circle (3);
+\draw (47.7,-31.3) node {$q3p2$};
+\draw [black] (47.7,-41) circle (3);
+\draw (47.7,-41) node {$q3p3$};
+\draw [black] (47.7,-41) circle (2.4);
+\draw [black] (26.3,-41) circle (3);
+\draw (26.3,-41) node {$q1p3$};
+\draw [black] (36.9,-41) circle (3);
+\draw (36.9,-41) node {$q2p3$};
+\draw [black] (10.4,-11.6) -- (12.7,-11.6);
+\fill [black] (12.7,-11.6) -- (11.9,-11.1) -- (11.9,-12.1);
+\draw [black] (18.7,-11.6) -- (23.3,-11.6);
+\fill [black] (23.3,-11.6) -- (22.5,-11.1) -- (22.5,-12.1);
+\draw (21,-12.1) node [below] {$0$};
+\draw [black] (29.3,-11.6) -- (33.9,-11.6);
+\fill [black] (33.9,-11.6) -- (33.1,-11.1) -- (33.1,-12.1);
+\draw (31.6,-12.1) node [below] {$0$};
+\draw [black] (39.9,-11.6) -- (44.6,-11.6);
+\fill [black] (44.6,-11.6) -- (43.8,-11.1) -- (43.8,-12.1);
+\draw (42.25,-11.1) node [above] {$0$};
+\draw [black] (46.277,-8.92) arc (234:-54:2.25);
+\draw (47.6,-4.35) node [above] {$0$};
+\fill [black] (48.92,-8.92) -- (49.8,-8.57) -- (48.99,-7.98);
+\draw [black] (15.73,-14.6) -- (15.77,-18.5);
+\fill [black] (15.77,-18.5) -- (16.26,-17.7) -- (15.26,-17.71);
+\draw (15.23,-16.55) node [left] {$1$};
+\draw [black] (15.8,-24.5) -- (15.8,-28.3);
+\fill [black] (15.8,-28.3) -- (16.3,-27.5) -- (15.3,-27.5);
+\draw (15.3,-26.4) node [left] {$1$};
+\draw [black] (15.8,-34.3) -- (15.8,-38);
+\fill [black] (15.8,-38) -- (16.3,-37.2) -- (15.3,-37.2);
+\draw (15.3,-36.15) node [left] {$1$};
+\draw [black] (49.913,-13.449) arc (35.41235:-34.2549:5.388);
+\fill [black] (49.98,-19.6) -- (50.84,-19.22) -- (50.01,-18.66);
+\draw (51.42,-16.52) node [right] {$1$};
+\draw [black] (47.7,-24.5) -- (47.7,-28.3);
+\fill [black] (47.7,-28.3) -- (48.2,-27.5) -- (47.2,-27.5);
+\draw (47.2,-26.4) node [left] {$1$};
+\draw [black] (47.7,-34.3) -- (47.7,-38);
+\fill [black] (47.7,-38) -- (48.2,-37.2) -- (47.2,-37.2);
+\draw (47.2,-36.15) node [left] {$1$};
+\draw [black] (24.119,-43.018) arc (-60.8579:-119.1421:6.302);
+\fill [black] (24.12,-43.02) -- (23.18,-42.97) -- (23.66,-43.84);
+\draw (21.05,-44.32) node [below] {$0$};
+\draw [black] (29.3,-41) -- (33.9,-41);
+\fill [black] (33.9,-41) -- (33.1,-40.5) -- (33.1,-41.5);
+\draw (31.6,-40.5) node [above] {$0$};
+\draw [black] (39.9,-41) -- (44.7,-41);
+\fill [black] (44.7,-41) -- (43.9,-40.5) -- (43.9,-41.5);
+\draw (42.3,-41.5) node [below] {$0$};
+\draw [black] (24.12,-13.66) -- (17.98,-19.44);
+\fill [black] (17.98,-19.44) -- (18.91,-19.26) -- (18.22,-18.53);
+\draw (22.07,-17.03) node [below] {$1$};
+\draw [black] (26.582,-14.57) arc (-5.15569:-88.21368:8.12);
+\fill [black] (26.58,-14.57) -- (26.01,-15.32) -- (27.01,-15.41);
+\draw (25.08,-20.23) node [below] {$0$};
+\draw [black] (12.904,-30.55) arc (-111.72591:-304.38887:11.935);
+\fill [black] (24.06,-9.61) -- (23.68,-8.75) -- (23.12,-9.57);
+\draw (6.11,-12.68) node [left] {$0$};
+\draw [black] (36.497,-14.566) arc (-14.35906:-115.36954:12.996);
+\fill [black] (18.34,-23.09) -- (18.85,-23.88) -- (19.28,-22.98);
+\draw (30.41,-23.62) node [below] {$1$};
+\draw [black] (18.089,-39.101) arc (116.65326:63.34674:6.6);
+\fill [black] (18.09,-39.1) -- (19.03,-39.19) -- (18.58,-38.3);
+\draw (21.05,-37.9) node [above] {$1$};
+\draw [black] (16.734,-38.16) arc (153.7719:26.2281:10.719);
+\fill [black] (16.73,-38.16) -- (17.54,-37.66) -- (16.64,-37.22);
+\draw (26.35,-31.68) node [above] {$1$};
+\draw [black] (45.36,-19.687) arc (-143.83464:-215.0079:5.35);
+\fill [black] (45.3,-13.46) -- (44.43,-13.83) -- (45.25,-14.4);
+\draw (43.81,-16.58) node [left] {$0$};
+\draw [black] (50.393,-12.665) arc (60.60454:-60.02287:10.096);
+\fill [black] (50.39,-12.67) -- (50.84,-13.49) -- (51.34,-12.62);
+\end{tikzpicture}
+\end{center}
+\section{Ejercicio 2}
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (12.6,-13.7) circle (3);
+\draw (12.6,-13.7) node {$q1$};
+\draw [black] (28.1,-13.7) circle (3);
+\draw (28.1,-13.7) node {$q2$};
+\draw [black] (62.4,-13.7) circle (3);
+\draw (62.4,-13.7) node {$q4$};
+\draw [black] (62.4,-13.7) circle (2.4);
+\draw [black] (45,-13.7) circle (3);
+\draw (45,-13.7) node {$q3$};
+\draw [black] (7.4,-13.7) -- (9.6,-13.7);
+\fill [black] (9.6,-13.7) -- (8.8,-13.2) -- (8.8,-14.2);
+\draw [black] (15.6,-13.7) -- (25.1,-13.7);
+\fill [black] (25.1,-13.7) -- (24.3,-13.2) -- (24.3,-14.2);
+\draw (20.35,-14.2) node [below] {$1$};
+\draw [black] (31.1,-13.7) -- (42,-13.7);
+\fill [black] (42,-13.7) -- (41.2,-13.2) -- (41.2,-14.2);
+\draw (36.55,-14.2) node [below] {$0,\epsilon$};
+\draw [black] (48,-13.7) -- (59.4,-13.7);
+\fill [black] (59.4,-13.7) -- (58.6,-13.2) -- (58.6,-14.2);
+\draw (53.7,-13.2) node [above] {$0,1$};
+\draw [black] (61.077,-11.02) arc (234:-54:2.25);
+\draw (62.4,-6.45) node [above] {$0,1$};
+\fill [black] (63.72,-11.02) -- (64.6,-10.67) -- (63.79,-10.08);
+\draw [black] (11.277,-11.02) arc (234:-54:2.25);
+\draw (12.6,-6.45) node [above] {$0,1$};
+\fill [black] (13.92,-11.02) -- (14.8,-10.67) -- (13.99,-10.08);
+\end{tikzpicture}
+\end{center}
+Lo primero que debemos hacer para poder minimizar un automata es convertirlo de AFND a AFD.
+
+Automata finito determinista:
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (12,-14.5) circle (3);
+\draw (12,-14.5) node {$A$};
+\draw [black] (30.9,-14.5) circle (3);
+\draw (30.9,-14.5) node {$B$};
+\draw [black] (30.9,-30) circle (3);
+\draw (30.9,-30) node {$D$};
+\draw [black] (30.9,-30) circle (2.4);
+\draw [black] (30.9,-45) circle (3);
+\draw (30.9,-45) node {$E$};
+\draw [black] (30.9,-45) circle (2.4);
+\draw [black] (48.5,-14.5) circle (3);
+\draw (48.5,-14.5) node {$C$};
+\draw [black] (48.5,-14.5) circle (2.4);
+\draw [black] (10.677,-11.82) arc (234:-54:2.25);
+\draw (12,-7.25) node [above] {$0$};
+\fill [black] (13.32,-11.82) -- (14.2,-11.47) -- (13.39,-10.88);
+\draw [black] (6.1,-14.5) -- (9,-14.5);
+\fill [black] (9,-14.5) -- (8.2,-14) -- (8.2,-15);
+\draw [black] (15,-14.5) -- (27.9,-14.5);
+\fill [black] (27.9,-14.5) -- (27.1,-14) -- (27.1,-15);
+\draw (21.45,-15) node [below] {$1$};
+\draw [black] (33.9,-14.5) -- (45.5,-14.5);
+\fill [black] (45.5,-14.5) -- (44.7,-14) -- (44.7,-15);
+\draw (39.7,-15) node [below] {$1$};
+\draw [black] (51.18,-13.177) arc (144:-144:2.25);
+\draw (55.75,-14.5) node [right] {$1$};
+\fill [black] (51.18,-15.82) -- (51.53,-16.7) -- (52.12,-15.89);
+\draw [black] (28.22,-46.323) arc (324:36:2.25);
+\draw (23.65,-45) node [left] {$0$};
+\fill [black] (28.22,-43.68) -- (27.87,-42.8) -- (27.28,-43.61);
+\draw [black] (32.651,-27.565) arc (142.4113:120.32827:45.961);
+\fill [black] (45.86,-15.93) -- (44.92,-15.9) -- (45.42,-16.76);
+\draw (37.68,-20.62) node [above] {$1$};
+\draw [black] (47.061,-17.131) arc (-31.52512:-65.73531:30.284);
+\fill [black] (33.69,-28.9) -- (34.63,-29.03) -- (34.22,-28.12);
+\draw (42.27,-24.51) node [below] {$0$};
+\draw [black] (30.9,-17.5) -- (30.9,-27);
+\fill [black] (30.9,-27) -- (31.4,-26.2) -- (30.4,-26.2);
+\draw (30.4,-22.25) node [left] {$0$};
+\draw [black] (30.9,-33) -- (30.9,-42);
+\fill [black] (30.9,-42) -- (31.4,-41.2) -- (30.4,-41.2);
+\draw (31.4,-37.5) node [right] {$0$};
+\draw [black] (48.613,-17.497) arc (-0.64388:-59.33024:30.748);
+\fill [black] (48.61,-17.5) -- (48.1,-18.29) -- (49.1,-18.3);
+\draw (45.15,-33.75) node [right] {$1$};
+\end{tikzpicture}
+\end{center}
+Tabla asociada al AFD:
+\begin{center}
+\begin{tabular}{1|11}
+\delta & 0 & 1 \\ \hline
+A & A & B \\
+B & D & C \\
+C & D & C \\
+D & E & C \\
+E & E & C
+\end{tabular}
+\end{center}
+Equivalencias de estados:\\
+A = \{ q1 \} \\
+B = \{ q1, q2, q3 \} \\
+C = \{ q1, q2, q3, q4 \} \\
+D = \{ q1, q3, q4 \} \\
+E = \{ q1, q4 \} \\
+\newpage
+Una vez tenemos la tabla asociada al autómata finito determinista, podemos agrupar los estados según si son finales o no finales.\\
+Obtendríamos los conjuntos \{A, B\} y \{C,D,E\}.\\
+Si comprobamos la equivalencias de estados, vemos que A y B no son equivalentes entre ellos, porque A siempre nos lleva a estados no finales, mientras que B siempre nos lleva a estados finales, por lo que tenemos que separarlos en dos conjuntos distintos \{A\} y \{B\}, mientras que C D y E son equivalentes porque en el autómata al entrar en un estado C D o E nos vamos moviendo entre esos mismos estados.\\
+Finalmente hemos obtenido los conjuntos \{A\}, \{B\} y \{C, D, E\}, a este ultimo lo renombraremos como conjunto F.\\
+
+Nueva tabla asociada al AFD minimal:
+\begin{center}
+\begin{tabular}{1|11}
+\delta & 0 & 1 \\ \hline
+A & A & B \\
+B & F & F \\
+F & F & F
+\end{tabular}
+\end{center}{}
+AFD minimal:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (12,-14.5) circle (3);
+\draw (12,-14.5) node {$A$};
+\draw [black] (30.9,-14.5) circle (3);
+\draw (30.9,-14.5) node {$B$};
+\draw [black] (48.5,-14.5) circle (3);
+\draw (48.5,-14.5) node {$F$};
+\draw [black] (48.5,-14.5) circle (2.4);
+\draw [black] (10.677,-11.82) arc (234:-54:2.25);
+\draw (12,-7.25) node [above] {$0$};
+\fill [black] (13.32,-11.82) -- (14.2,-11.47) -- (13.39,-10.88);
+\draw [black] (6.1,-14.5) -- (9,-14.5);
+\fill [black] (9,-14.5) -- (8.2,-14) -- (8.2,-15);
+\draw [black] (15,-14.5) -- (27.9,-14.5);
+\fill [black] (27.9,-14.5) -- (27.1,-14) -- (27.1,-15);
+\draw (21.45,-15) node [below] {$1$};
+\draw [black] (33.9,-14.5) -- (45.5,-14.5);
+\fill [black] (45.5,-14.5) -- (44.7,-14) -- (44.7,-15);
+\draw (39.7,-15) node [below] {$0,1$};
+\draw [black] (47.177,-11.82) arc (234:-54:2.25);
+\draw (48.5,-7.25) node [above] {$0,1$};
+\fill [black] (49.82,-11.82) -- (50.7,-11.47) -- (49.89,-10.88);
+\end{tikzpicture}
+\end{center}
+
+
+
+\section{Ejercicio 3}
+\subsection{}
+\begin{math}
+L_{1} = \{ (aa)^{n}b^{m+1} \in \{a,b\}^{*} | n \geq 0, m\geq n \}
+\end{math} no es regular.
+
+Sea \begin{math} n \in \mathbb{N} \end{math} y \begin{math} z \in L_{1} \end{math} escojo \begin{math} z = (aa)^{n}b^{n+1} \in L_{1} \end{math}
+
+Sea una descomposición de z, \begin{math} z = uvw \end{math}.
+
+\begin{math}
+u = (aa)^{k}\\
+v = (aa)^{l}\\
+w = (aa)^{n-k-l}b^{n+1}\\
+\end{math}
+
+Entonces \begin{math}
+z = uv^{i}w = (aa)^{k}(aa)^{il}(aa)^{n-k-l}b^{n+1}
+\end{math}
+
+\begin{math}
+\exists i | uv^{i}w \notin L_{1}
+\end{math}
+Para i = 2:\\
+\begin{math}
+z = uv^{2}w = (aa)^{k}(aa)^{2l}(aa)^{n-k-l}b^{n+1}\\
+k+2l+n-k-l = n+l
+\end{math}
+
+Sabemos que \begin{math} l \geq 1 \end{math} por lo que \begin{math} n > n + l\end{math} y por tanto no se cumple la condición \begin{math} m\geq n \end{math} y como \begin{math}uv^{i}w \notin L_{1}\end{math} el lenguaje no es regular porque no cumple el lema de bombeo.
+
+\subsection{}
+
+\begin{math}
+L_{2} = \{ ww | w \in \{0,1\}^{*} \}
+\end{math} no es regular.
+Sea \begin{math} n \in \mathbb{N} \end{math} y \begin{math} z \in L_{1} \end{math} escojo \begin{math} z = ww \in L_{2}\\ w= 0^{n}1\end{math}\\
+
+Sea una descomposición de z, \begin{math} z = uvw \end{math}.
+
+\begin{math}
+u = 0^{k}\\
+v = 0^{l}\\
+w = 0^{n-k-l}10^{n}1\\
+\end{math}
+
+Entonces \begin{math}
+z = uv^{i}w = 0^{k}0^{il}0^{n-k-l}10^{n}1
+\end{math}
+
+\begin{math}
+\exists i | uv^{i}w \notin L_{2}
+\end{math}
+Para i = 2:\\
+\begin{math}
+z = uv^{2}w = 0^{k}0^{2l}0^{n-k-l}10^{n}1\\
+k+2l+n-k-l = n+l
+\end{math}
+
+Sabemos que \begin{math} l \geq 1 \end{math} por lo que \begin{math} n+l > n \end{math} y por tanto \begin{math}uv^{i}w \notin L_{2}\end{math} el lenguaje no es regular porque no cumple el lema de bombeo.
+
+\subsection{}
+
+\begin{math}
+L_{3} = \{ a^{2^{n}}\in \{ a\}^{*}| n \geq 0 \} 
+\end{math} no es regular.
+Sea \begin{math} n \in \mathbb{N} \end{math} y \begin{math} z \in L_{3} \end{math} escojo \begin{math} z = a^{2^{n}} \in L_{3}\end{math}\\
+
+Sea una descomposición de z, \begin{math} z = uvw \end{math}.
+
+\begin{math}
+u = a^{k} \\
+v = a^{l} \\
+w = a^{2^{n}-k-l}\\
+\end{math}
+
+Entonces \begin{math}
+z = uv^{i}w = a^{k}a^{il}a^{2^{n}-k-l}
+\end{math}
+
+\begin{math}
+\exists i | uv^{i}w \notin L_{3}
+\end{math}
+Para i = 2:\\
+\begin{math}
+z = uv^{2}w = a^{k}a^{2l}a^{2^{n}-k-l}\\
+^{k}a^{2l}a^{2^{n}-k-l} = a^{2^{n}+l}
+\end{math}
+
+Sabemos que \begin{math} l \geq 1 \end{math} por lo que \begin{math}uv^{i}w \notin L_{3}\end{math} el lenguaje no es regular porque no cumple el lema de bombeo.
+
+\end{document}
+

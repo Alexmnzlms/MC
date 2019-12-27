@@ -422,7 +422,7 @@ static const flex_int32_t yy_rule_can_match_eol[6] =
 #define YY_RESTORE_YY_MORE_OFFSET
 #line 1 "practica2.l"
 #line 5 "practica2.l"
-   /*------------------------ Seccion de Declaraciones -------------------------*/
+   /*---------------- Seccion de Declaraciones ----------------*/
 #include <iostream>
 #include <fstream>
 #include <stack>
@@ -431,12 +431,11 @@ using namespace std;
 ifstream fichero;
 stack<string> pila;
 stack<int> linea;
-string etiq;
 int nf = 0;
 int la = 0, lc = 0;
 bool fallo = false;
+#line 437 "lex.yy.cc"
 #line 438 "lex.yy.cc"
-#line 439 "lex.yy.cc"
 
 #define INITIAL 0
 
@@ -568,11 +567,11 @@ YY_DECL
 		}
 
 	{
-#line 21 "practica2.l"
+#line 20 "practica2.l"
 
-#line 23 "practica2.l"
-   /*-------------------------- Seccion de Reglas ------------------------------*/
-#line 575 "lex.yy.cc"
+#line 22 "practica2.l"
+   /*---------------- Seccion de Reglas ----------------*/
+#line 574 "lex.yy.cc"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -641,24 +640,27 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 24 "practica2.l"
+#line 23 "practica2.l"
 {
    string cadena(YYText());
    cadena.pop_back();
    cadena.erase(cadena.begin());
-   cout << "Leo la cadena autocontenida: <" << cadena << "> en la linea " << yylineno << endl;
+   cout << "Leo la cadena: <" << cadena
+   << "> en la linea " << yylineno <<
+   " y no es necesario cerrarla" << endl;
 }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 31 "practica2.l"
+#line 32 "practica2.l"
 {
    string cadena(YYText());
    cadena.pop_back();
    cadena.erase(cadena.begin());
    bool borrar = false;
    int tam = cadena.size();
-   cout << "Leo la cadena: <" << cadena << "> en la linea " << yylineno << endl;
+   cout << "Leo la cadena: <" << cadena
+   << "> en la linea " << yylineno << endl;
    for(string::iterator i = cadena.begin(); i != cadena.end(); i++){
       if(*i == ' '){
          borrar = true;
@@ -667,14 +669,11 @@ YY_RULE_SETUP
          cadena.erase(i);
          i--;
       }
-      //cout << "Cadena actual: " << cadena << endl;
    }
-   //cout << "Cambios en la cadena: " << cadena << endl;
    if(cadena[0] != '/'){
       la = yylineno;
       linea.push(la);
       pila.push(cadena);
-      //cout << "Meto en la pila: " << cadena << endl;
    } else{
       lc = yylineno;
       cadena.erase(cadena.begin());
@@ -684,41 +683,41 @@ YY_RULE_SETUP
       }
       if(!cadena.compare(pila.top())){
          la = linea.top();
-         cout << "----------------------------------------------------------------------------------------------" << endl;
-         cout << "Has cerrado la etiqueta <" << pila.top() << "> en la linea " <<
-         la << " con <" << cadena << "> en la linea " << lc << endl;
-         cout << "----------------------------------------------------------------------------------------------" << endl;
+         cout << "--------------------------------" << endl;
+         cout << "Has cerrado la etiqueta <" << pila.top()
+         << "> en la linea " << la << " con <"
+         << cadena << "> en la linea " << lc << endl;
+         cout << "--------------------------------" << endl;
          pila.pop();
          linea.pop();
       } else {
-         cout << "----------------------------------------------------------------------------------------------" << endl;
-         cout << "Has cerrado MAL la etiqueta <" << pila.top() << "> con <" << cadena << "> en la linea " << lc << endl;
-         cout << "----------------------------------------------------------------------------------------------" << endl;
+         cout << "--------------------------------" << endl;
+         cout << "Has cerrado MAL la etiqueta <" << pila.top()
+         << "> con <" << cadena << "> en la linea " << lc << endl;
+         cout << "--------------------------------" << endl;
          fallo = true;
          nf++;
-         exit(1);
       }
-      //cout << "Fuera de la pila: " << cadena << endl;
    }
 }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 80 "practica2.l"
+#line 79 "practica2.l"
 {}
 	YY_BREAK
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 81 "practica2.l"
+#line 80 "practica2.l"
 {}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 83 "practica2.l"
+#line 82 "practica2.l"
 ECHO;
 	YY_BREAK
-#line 721 "lex.yy.cc"
+#line 720 "lex.yy.cc"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1690,9 +1689,9 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 83 "practica2.l"
+#line 82 "practica2.l"
 
-   /*----------------------- Seccion de Procedimientos -------------------------*/
+   /*---------------- Seccion de Procedimientos ----------------*/
 
 int main(int argc, char *argv[]){
    if (argc == 2){
@@ -1713,7 +1712,8 @@ int main(int argc, char *argv[]){
       cout << "No queda nada en la pila" << endl;
    } else {
       while(!pila.empty()){
-         cout << "Ha quedado la etiqueta <" << pila.top() << "> en la linea " <<
+         cout << "Ha quedado la etiqueta <"
+         << pila.top() << "> en la linea " <<
          linea.top() << endl;
          pila.pop();
          linea.pop();

@@ -17,7 +17,7 @@
 
 \title{Práctica 5}
 \author{Alejandro Manzanares Lemus }
-\date{\today} 
+\date{\today}
 
 \makeatletter
 \let\thetitle\@title
@@ -37,13 +37,13 @@
     \centering
     \vspace*{0.5 cm}
     \includegraphics[scale = 0.50]{UGR.png}\\[1.0 cm]
-    %\textsc{\LARGE Universidad de Granada}\\[2.0 cm]   
-    \textsc{\large 3ºA}\\[0.5 cm]            
-    \textsc{\large Grado en Ingeniería Informática}\\[0.5 cm]              
+    %\textsc{\LARGE Universidad de Granada}\\[2.0 cm]
+    \textsc{\large 3ºA}\\[0.5 cm]
+    \textsc{\large Grado en Ingeniería Informática}\\[0.5 cm]
     \rule{\linewidth}{0.2 mm} \\[0.4 cm]
     { \huge \bfseries \thetitle}\\
     \rule{\linewidth}{0.2 mm} \\[1.5 cm]
-    
+
     \begin{minipage}{0.4\textwidth}
         \begin{flushleft} \large
             \emph{Autor:}\\
@@ -53,20 +53,48 @@
             \begin{minipage}{0.4\textwidth}
             \begin{flushright} \large
             \emph{Asignatura: \\
-            Modelos de Computación}                   
+            Modelos de Computación}
         \end{flushright}
     \end{minipage}\\[1 cm]
-  	
+
     {\large \thedate}\\[1 cm]
- 	
+
     \vfill
-    
+
 \end{titlepage}
 \pagebreak
 \section{Ejercicio 1}
+\subsection{Apartado a}
+\begin{math}
+S\rightarrow AbB\\
+A\rightarrow aA | \epsilon\\
+B\rightarrow aB|bB|\epsilon
+\end{math}
+
+La gramática de este apartado genera el lenguaje \begin{math}
+L = \{a^{*}b(a,b)^{*}\}
+\end{math}
+, nunca podremos llegar a generar la misma palabra a través de dos caminos, porque partiendo de la producción inicial  \begin{math} S \rightarrow AbB \end{math}, siguiendo por A solo podremos añadir a's a la izquierda de la palabra y siguiendo por B solo podemos añadir a's o b's al final de la palabra.
+
+\subsection{Apartado b}
+\begin{math}
+S \rightarrow abaS|babS|baS|\epsilon
+\end{math}
+
+Esta gramática es ambigua, porque existe al menos una palabra que se puede generar dos veces siguiendo dos caminos distintos.\\
+La palabra bababa se puede formar de las siguientes formas:\\
+\begin{math}
+S \rightarrow babS \rightarrow bababaS \rightarrow bababa\\
+S \rightarrow baS \rightarrow babaS \rightarrow bababaS \rightarrow bababa
+\end{math}
+
 \section{Ejercicio 2}
 
-\begin{center}
+\begin{math}
+L = \{0^{i}1^{j}2^{k}3^{m}4 \end{math} tal que \begin{math} i,j,k \ge, m = i+j+k\}
+\end{math}
+
+\begin{right}
 \begin{tikzpicture}[scale=0.2]
 \tikzstyle{every node}+=[inner sep=0pt]
 \draw [black] (6.1,-3.2) circle (3);
@@ -99,7 +127,85 @@
 \draw [black] (0.2,-3.2) -- (3.1,-3.2);
 \fill [black] (3.1,-3.2) -- (2.3,-2.7) -- (2.3,-3.7);
 \end{tikzpicture}
-\end{center}
-\section{Ejercicio 3}
-\end{document}
+\end{right}
 
+La pila empieza con una Z.\\
+Cada vez que el autómata lee un 0 desplaza el tope de la pila y mete una C, cada vez que lee un 1 una U y cada vez que lee un 2 una D. \\
+Como 0, 1 y 2 deben permanecer en ese orden, cuando se lea un cero solo se meterá una C en la pila si el tope de esta fuera una Z (no se ha introducido ningún cero) o una C (ya se ha introducido algún cero), cuando se lea un 1 solo se meterá una U si el tope de la pila es Z, C o U (ya se ha introducido algún uno) y como es de esperar, cuando se lea un 2, solo se meterá una D en la pila si el tope es Z, C, U o D (ya se ha introducido algún dos).\\
+Una vez hemos terminado de introducir 0's, 1's y 2's, por una transición nula pasamos a otro estado, en el que el autómata cada vez que lea un 3, si el tope de la pila es C, U o D lo saca de esta, porque el numero de 3's debe ser la suma del numero de 0's, 1's y 2's. Si no hubiéramos introducido ninguno, el numero de 3 seria 0.\\
+Cuando el autómata lea un 4, se supone que el único elemento que debe quedar en la pila es el símbolo inicial, y lo que hace es sacarlo de la pila y se acepta la palabra.
+\section{Ejercicio 3}
+\begin{math}
+L = \{1^{n}w \in \{0,1\} \end{math} tal que \begin{math} |w| =n,n > 0\}
+\end{math}
+\subsection{Autómata}
+\begin{left}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (6.6,-3.2) circle (3);
+\draw (6.6,-3.2) node {$q0$};
+\draw [black] (39.6,-3.2) circle (3);
+\draw (39.6,-3.2) node {$q1$};
+\draw (6.6,-13.4) node {$1/S/SS$};
+\draw (39.6,-13.4) node {$1/S/\epsilon$};
+\draw (39.6,-15.2) node {$\epsilon/Z/\epsilon$};
+\draw [black] (7.923,-5.88) arc (54:-234:2.25);
+\draw (6.6,-10.45) node [below] {$1/Z/SZ$};
+\fill [black] (5.28,-5.88) -- (4.4,-6.23) -- (5.21,-6.82);
+\draw [black] (9.6,-3.2) -- (36.6,-3.2);
+\fill [black] (36.6,-3.2) -- (35.8,-2.7) -- (35.8,-3.7);
+\draw (23.1,-3.7) node [below] {$\epsilon/S/S$};
+\draw [black] (40.923,-5.88) arc (54:-234:2.25);
+\draw (39.6,-10.45) node [below] {$0/S/\epsilon$};
+\fill [black] (38.28,-5.88) -- (37.4,-6.23) -- (38.21,-6.82);
+\draw [black] (0.2,-3.2) -- (3.6,-3.2);
+\fill [black] (3.6,-3.2) -- (2.8,-2.7) -- (2.8,-3.7);
+\end{tikzpicture}
+\end{left}
+\subsection{Gramática}
+\begin{math}
+S \rightarrow (q_{0},Z,q_{0})|(q_{0},Z,q_{1})\\
+(q_{0},Z,q_{0}) \rightarrow 1(q_{0},S,q_{0})(q_{0},Z,q_{0}) | 1(q_{0},S,q_{1})(q_{1},Z,q_{0})\\
+(q_{0},Z,q_{1}) \rightarrow 1(q_{0},S,q_{0})(q_{0},Z,q_{1}) | 1(q_{0},S,q_{1})(q_{1},Z,q_{1})\\
+(q_{1},Z,q_{1}) \rightarrow \epsilon\\
+(q_{0},S,q_{0}) \rightarrow 1(q_{0},S,q_{0})(q_{0},S,q_{0}) | 1(q_{0},S,q_{1})(q_{1},S,q_{0})\\
+(q_{0},S,q_{1}) \rightarrow 1(q_{0},S,q_{0})(q_{0},S,q_{1}) | 1(q_{0},S,q_{1})(q_{1},S,q_{1}) | (q_{1},S,q_{1})\\
+(q_{1},S,q_{1}) \rightarrow 0 | 1\\
+\end{math}
+\subsection{Eliminar producciones inútiles}
+Renombremos las reglas:\\
+\begin{math}
+A = (q_{0},Z,q_{0})\\
+B = (q_{0},Z,q_{1})\\
+C = (q_{1},Z,q_{1})\\
+D = (q_{0},S,q_{0})\\
+E = (q_{0},S,q_{1})\\
+F = (q_{1},S,q_{1}\\
+\end{math}
+Eliminamos \begin{math}
+(q_{1},Z,q_{0}) y (q_{1},S,q_{0})
+\end{math} porque a partir de ellas no podemos generar nada y nos queda:
+S \rightarrow A|B\\
+A \rightarrow 1DA | 1E\\
+B \rightarrow 1DB | 1EC\\
+C \rightarrow \epsilon\\
+D \rightarrow 1DD | 1E\\
+E \rightarrow 1DE | 1EF | F\\
+F \rightarrow 0 | 1\\
+
+Eliminamos las producciones inútiles:\\
+S \rightarrow B\\
+B \rightarrow 1E\\
+E \rightarrow 1EF | F\\
+F \rightarrow 0 | 1\\
+
+\subsection{Forma normal de Chomsky}
+Para pasar a forma normal de Chomsky simplemente tenemos que crear una nueva regla para generar EF y una para generar 1:\\
+S \rightarrow B\\
+B \rightarrow UE\\
+E \rightarrow UA | F\\
+F \rightarrow 0 | 1\\
+A \rightarrow EF\\
+U \rightarrow 1
+
+\end{document}

@@ -34,3 +34,6 @@
 # Documents
 *.pdf
 *.html
+*.aux
+*.log
+*.synctex.gz
